@@ -1,4 +1,4 @@
-package data;
+package ru.netology.delivery.data;
 
 import com.github.javafaker.Faker;
 import lombok.Value;
@@ -18,10 +18,8 @@ public class DataGenerator {
             return LocalDate.now().plusDays(shift).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         }
 
-        public static String generateCity() {
-            // TODO: добавить логику для объявления переменной city и задания её значения, генерацию можно выполнить
-            String[] cities = new String[]{"Майкоп", "Горно-Алтайск", "Уфа", "Улан-Удэ", "Махачкала", "Магас", "Нальчик", "Элиста",
-                    "Петрозаводск", "Сыктывкар", "Симферополь", "Луганск", "Йошкар-Ола", "Саранск", "Якутск", "Владикавказ", "Казань",};
+        public static String generateCity(Faker faker) {
+            String[] cities = new String[]{"Майкоп", "Горно-Алтайск", "Уфа", "Улан-Удэ", "Махачкала"};
             return cities[new Random().nextInt(cities.length)];
         }
 
@@ -34,13 +32,14 @@ public class DataGenerator {
         }
 
         public static class Registration {
-            private Registration() {
+            private static Faker faker;
+            private Registration(){
             }
 
 
             public static UserInfo generateUser(String locale) {
-                Faker faker = new Faker(new Locale(locale));
-                return new UserInfo(generateCity(), generateName(faker), generatePhone(faker));
+                faker = new Faker(new Locale(locale));
+                return new UserInfo(generateCity(faker), generateName(faker), generatePhone(faker));
 
             }
         }
