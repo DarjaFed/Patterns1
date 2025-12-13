@@ -18,7 +18,7 @@ class DeliveryTest {
 
     @BeforeEach
     void setup() {
-        open("http://localhost:7777");
+        open("http://localhost:9999");
 
     }
             @Test
@@ -46,7 +46,6 @@ class DeliveryTest {
                 $("[data-test-id='replan-notification'] .notification__content")
                         .shouldHave(text("У вас уже запланирована встреча на другую дату. Перепланировать?"))
                         .shouldBe(visible);
-
                 $("[data-test-id=date] input").press(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
                 $("[data-test-id=date] input").setValue(secondMeetingDate);
                 $(Selectors.byText("Запланировать")).click();
